@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planificación Anual · Matemática 8° EBI</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f2f4f8;
+    --ink: #111827;
+    --muted: #6b7280;
+    --rule: #d1d5db;
+    --accent: #f59e0b;
+    --card: #ffffff;
+    --shadow: 0 2px 16px rgba(17,24,39,0.08);
+
+    /* bloque colors */
+    --porc-col:  #1d4ed8;  --porc-bg:  #eff6ff;
+    --ivp-col:   #0e7490;  --ivp-bg:   #ecfeff;
+    --prob-col:  #7c3aed;  --prob-bg:  #f5f3ff;
+    --alg-col:   #c2410c;  --alg-bg:   #fff7ed;
+    --ecin-col:  #9d174d;  --ecin-bg:  #fdf2f8;
+    --func-col:  #065f46;  --func-bg:  #ecfdf5;
+    --prop-col:  #1e3a5f;  --prop-bg:  #e8f0fe;
+    --nota-col:  #b45309;  --nota-bg:  #fffbeb;
+    --trans-col: #3d6b35;  --trans-bg: #f0fdf4;
+    --thal-col:  #6d28d9;  --thal-bg:  #f5f3ff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Mono', monospace;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 3rem 2rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    border: 50px solid var(--accent);
+    border-radius: 50%;
+    opacity: .09;
+  }
+  .site-header::after {
+    content: '';
+    position: absolute;
+    bottom: -50px; left: 240px;
+    width: 180px; height: 180px;
+    background: var(--accent);
+    opacity: .05;
+    transform: rotate(30deg);
+  }
+  .header-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: .7rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: .75rem;
+  }
+  .header-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.1;
+    margin-bottom: .5rem;
+  }
+  .header-sub { font-size: .85rem; color: #9ca3af; letter-spacing: .04em; }
+  .header-meta { display: flex; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap; }
+  .meta-pill {
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 100px;
+    padding: .35rem 1rem;
+    font-size: .72rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #9ca3af;
+  }
+
+  /* ── PROGRESS ── */
+  .progress-section {
+    background: var(--ink);
+    padding: 0 2rem 2rem;
+    border-bottom: 3px solid var(--accent);
+  }
+  .progress-label {
+    font-size: .65rem; letter-spacing: .15em; text-transform: uppercase;
+    color: #6b7280; margin-bottom: .6rem;
+  }
+  .progress-track {
+    height: 8px; background: rgba(255,255,255,.08);
+    border-radius: 4px; display: flex; gap: 2px; overflow: hidden;
+  }
+  .progress-seg { height: 100%; border-radius: 3px; }
+  .ps-porc { background: var(--porc-col); flex: 2; }
+  .ps-ivp  { background: var(--ivp-col);  flex: 2; }
+  .ps-prob { background: var(--prob-col); flex: 2; }
+  .ps-alg  { background: var(--alg-col);  flex: 3; }
+  .ps-ecin { background: var(--ecin-col); flex: 4; }
+  .ps-func { background: var(--func-col); flex: 5; }
+  .ps-prop { background: var(--prop-col); flex: 5; }
+  .ps-nota { background: var(--nota-col); flex: 3; }
+  .ps-trans{ background: var(--trans-col);flex: 3; }
+  .ps-thal { background: var(--thal-col); flex: 3; }
+
+  .progress-legend {
+    display: flex; flex-wrap: wrap; gap: .6rem 1.4rem;
+    margin-top: .7rem; font-size: .62rem; color: #6b7280;
+  }
+  .leg-item { display: flex; align-items: center; gap: .35rem; }
+  .leg-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── MAIN ── */
+  .main { max-width: 980px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+
+  /* ── TOP ACTIONS ── */
+  .top-actions { display: flex; justify-content: flex-end; gap: .75rem; margin-bottom: 2rem; }
+  .btn {
+    font-family: 'DM Mono', monospace;
+    font-size: .7rem; letter-spacing: .1em; text-transform: uppercase;
+    padding: .5rem 1.2rem; border-radius: 8px;
+    border: 1.5px solid var(--ink); background: transparent;
+    cursor: pointer; transition: all .2s; color: var(--ink);
+  }
+  .btn:hover { background: var(--ink); color: var(--bg); }
+  .btn-primary { background: var(--ink); color: var(--bg); }
+  .btn-primary:hover { background: #374151; border-color: #374151; }
+
+  /* ── OVERVIEW GRID ── */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: .85rem;
+    margin-bottom: 3rem;
+  }
+  .ov-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 1.2rem 1.1rem;
+    border-top: 4px solid transparent;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .ov-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(17,24,39,0.13); }
+  .ov-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.4rem; line-height: 1; margin-bottom: .2rem;
+  }
+  .ov-unit { font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .ov-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: .88rem; margin-top: .65rem; }
+  .ov-hint { font-size: .68rem; color: var(--muted); margin-top: .2rem; }
+
+  .ov-porc { border-color: var(--porc-col); } .ov-porc .ov-num { color: var(--porc-col); }
+  .ov-ivp  { border-color: var(--ivp-col);  } .ov-ivp  .ov-num { color: var(--ivp-col);  }
+  .ov-prob { border-color: var(--prob-col); } .ov-prob .ov-num { color: var(--prob-col); }
+  .ov-alg  { border-color: var(--alg-col);  } .ov-alg  .ov-num { color: var(--alg-col);  }
+  .ov-ecin { border-color: var(--ecin-col); } .ov-ecin .ov-num { color: var(--ecin-col); }
+  .ov-func { border-color: var(--func-col); } .ov-func .ov-num { color: var(--func-col); }
+  .ov-prop { border-color: var(--prop-col); } .ov-prop .ov-num { color: var(--prop-col); }
+  .ov-nota { border-color: var(--nota-col); } .ov-nota .ov-num { color: var(--nota-col); }
+  .ov-trans{ border-color: var(--trans-col);} .ov-trans .ov-num{ color: var(--trans-col);}
+  .ov-thal { border-color: var(--thal-col); } .ov-thal .ov-num { color: var(--thal-col); }
+
+  /* ── SECTION BLOCK ── */
+  .section-block {
+    margin-bottom: 1.5rem;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .section-header {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.3rem 1.75rem;
+    cursor: pointer; user-select: none;
+    transition: filter .15s;
+  }
+  .section-header:hover { filter: brightness(.96); }
+
+  .sb-porc .section-header { background: var(--porc-bg); border-left: 5px solid var(--porc-col); }
+  .sb-ivp  .section-header { background: var(--ivp-bg);  border-left: 5px solid var(--ivp-col);  }
+  .sb-prob .section-header { background: var(--prob-bg); border-left: 5px solid var(--prob-col); }
+  .sb-alg  .section-header { background: var(--alg-bg);  border-left: 5px solid var(--alg-col);  }
+  .sb-ecin .section-header { background: var(--ecin-bg); border-left: 5px solid var(--ecin-col); }
+  .sb-func .section-header { background: var(--func-bg); border-left: 5px solid var(--func-col); }
+  .sb-prop .section-header { background: var(--prop-bg); border-left: 5px solid var(--prop-col); }
+  .sb-nota .section-header { background: var(--nota-bg); border-left: 5px solid var(--nota-col); }
+  .sb-trans .section-header{ background: var(--trans-bg);border-left: 5px solid var(--trans-col);}
+  .sb-thal .section-header { background: var(--thal-bg); border-left: 5px solid var(--thal-col); }
+
+  .section-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    display: grid; place-items: center;
+    font-size: 1.2rem; flex-shrink: 0;
+  }
+  .sb-porc .section-icon { background: var(--porc-col); }
+  .sb-ivp  .section-icon { background: var(--ivp-col);  }
+  .sb-prob .section-icon { background: var(--prob-col); }
+  .sb-alg  .section-icon { background: var(--alg-col);  }
+  .sb-ecin .section-icon { background: var(--ecin-col); }
+  .sb-func .section-icon { background: var(--func-col); }
+  .sb-prop .section-icon { background: var(--prop-col); }
+  .sb-nota .section-icon { background: var(--nota-col); }
+  .sb-trans .section-icon{ background: var(--trans-col);}
+  .sb-thal .section-icon { background: var(--thal-col); }
+
+  .section-title-wrap { flex: 1; }
+  .section-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.05rem; }
+  .section-weeks-badge { font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: .1rem; }
+
+  .chevron {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: rgba(0,0,0,.08);
+    display: grid; place-items: center;
+    transition: transform .3s; flex-shrink: 0; font-size: .8rem;
+  }
+  .section-block.open .chevron { transform: rotate(180deg); }
+
+  /* ── SECTION BODY ── */
+  .section-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height .45s cubic-bezier(.4,0,.2,1);
+    background: var(--card);
+  }
+  .section-block.open .section-body { max-height: 6000px; }
+  .section-body-inner { padding: 1.75rem; }
+
+  /* ── TABS ── */
+  .tabs { display: flex; gap: .5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .tab-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: .7rem; letter-spacing: .08em; text-transform: uppercase;
+    padding: .42rem .95rem; border: 1.5px solid var(--rule);
+    border-radius: 100px; background: transparent;
+    cursor: pointer; color: var(--muted); transition: all .2s;
+  }
+  .tab-btn:hover { border-color: var(--ink); color: var(--ink); }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; animation: fadeIn .3s ease; }
+  @keyframes fadeIn { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform: none; } }
+
+  /* ── CONTENT STYLES ── */
+  .subsection-title {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: .78rem; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 1rem;
+    padding-bottom: .5rem; border-bottom: 1px solid var(--rule);
+  }
+
+  .content-list { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
+  .content-list li {
+    display: flex; align-items: flex-start; gap: .75rem;
+    font-size: .82rem; line-height: 1.5;
+    padding: .65rem 1rem; background: var(--bg); border-radius: 8px;
+  }
+  .content-list li .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    flex-shrink: 0; margin-top: .4rem;
+  }
+
+  .sb-porc .dot { background: var(--porc-col); }
+  .sb-ivp  .dot { background: var(--ivp-col);  }
+  .sb-prob .dot { background: var(--prob-col); }
+  .sb-alg  .dot { background: var(--alg-col);  }
+  .sb-ecin .dot { background: var(--ecin-col); }
+  .sb-func .dot { background: var(--func-col); }
+  .sb-prop .dot { background: var(--prop-col); }
+  .sb-nota .dot { background: var(--nota-col); }
+  .sb-trans .dot{ background: var(--trans-col);}
+  .sb-thal .dot { background: var(--thal-col); }
+
+  /* objectives */
+  .obj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 600px) { .obj-grid { grid-template-columns: 1fr; } }
+
+  .obj-card {
+    border-radius: 10px; border: 1.5px solid var(--rule);
+    padding: 1rem 1.1rem; font-size: .8rem;
+  }
+  .obj-label {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: .5rem;
+  }
+  .sb-porc .obj-label { color: var(--porc-col); }
+  .sb-ivp  .obj-label { color: var(--ivp-col);  }
+  .sb-prob .obj-label { color: var(--prob-col); }
+  .sb-alg  .obj-label { color: var(--alg-col);  }
+  .sb-ecin .obj-label { color: var(--ecin-col); }
+  .sb-func .obj-label { color: var(--func-col); }
+  .sb-prop .obj-label { color: var(--prop-col); }
+  .sb-nota .obj-label { color: var(--nota-col); }
+  .sb-trans .obj-label{ color: var(--trans-col);}
+  .sb-thal .obj-label { color: var(--thal-col); }
+
+  .indicators-list { list-style: none; display: flex; flex-direction: column; gap: .4rem; }
+  .indicators-list li {
+    font-size: .77rem; padding: .42rem .7rem;
+    border-radius: 6px; line-height: 1.5;
+    display: flex; gap: .5rem; align-items: flex-start;
+  }
+  .sb-porc .indicators-list li { background: var(--porc-bg); }
+  .sb-ivp  .indicators-list li { background: var(--ivp-bg);  }
+  .sb-prob .indicators-list li { background: var(--prob-bg); }
+  .sb-alg  .indicators-list li { background: var(--alg-bg);  }
+  .sb-ecin .indicators-list li { background: var(--ecin-bg); }
+  .sb-func .indicators-list li { background: var(--func-bg); }
+  .sb-prop .indicators-list li { background: var(--prop-bg); }
+  .sb-nota .indicators-list li { background: var(--nota-bg); }
+  .sb-trans .indicators-list li{ background: var(--trans-bg);}
+  .sb-thal .indicators-list li { background: var(--thal-bg); }
+
+  .indicators-list li::before { content: '→'; flex-shrink:0; font-size: .7rem; margin-top: .15rem; }
+  .sb-porc .indicators-list li::before { color: var(--porc-col); }
+  .sb-ivp  .indicators-list li::before { color: var(--ivp-col);  }
+  .sb-prob .indicators-list li::before { color: var(--prob-col); }
+  .sb-alg  .indicators-list li::before { color: var(--alg-col);  }
+  .sb-ecin .indicators-list li::before { color: var(--ecin-col); }
+  .sb-func .indicators-list li::before { color: var(--func-col); }
+  .sb-prop .indicators-list li::before { color: var(--prop-col); }
+  .sb-nota .indicators-list li::before { color: var(--nota-col); }
+  .sb-trans .indicators-list li::before{ color: var(--trans-col);}
+  .sb-thal .indicators-list li::before { color: var(--thal-col); }
+
+  /* timeline */
+  .timeline { display: flex; flex-direction: column; gap: .5rem; }
+  .week-row { display: grid; grid-template-columns: 90px 1fr; gap: 1rem; align-items: center; }
+  .week-label { font-size: .65rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); text-align: right; }
+  .week-bar {
+    height: 28px; border-radius: 6px;
+    display: flex; align-items: center; padding: 0 .75rem;
+    font-size: .7rem; color: white; font-weight: 500;
+    letter-spacing: .03em; position: relative; overflow: hidden;
+  }
+  .week-bar::after {
+    content: ''; position: absolute; top: 0; right: 0;
+    width: 40%; height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,.15));
+  }
+  .wbar-porc { background: var(--porc-col); }
+  .wbar-ivp  { background: var(--ivp-col);  }
+  .wbar-prob { background: var(--prob-col); }
+  .wbar-alg  { background: var(--alg-col);  }
+  .wbar-ecin { background: var(--ecin-col); }
+  .wbar-func { background: var(--func-col); }
+  .wbar-prop { background: var(--prop-col); }
+  .wbar-nota { background: var(--nota-col); }
+  .wbar-trans{ background: var(--trans-col);}
+  .wbar-thal { background: var(--thal-col); }
+
+  /* methodology */
+  .method-box {
+    background: var(--bg); border-radius: 10px;
+    padding: 1.1rem 1.2rem; border-left: 3px solid var(--accent);
+    margin-bottom: .85rem; font-size: .81rem; line-height: 1.65; color: var(--ink);
+  }
+  .method-box strong { font-family: 'Syne', sans-serif; font-weight: 700; }
+
+  /* bibliography */
+  .bib-card {
+    background: var(--bg); border-radius: 10px;
+    padding: .85rem 1.1rem; font-size: .8rem; line-height: 1.5;
+    border: 1px solid var(--rule); transition: border-color .2s;
+  }
+  .bib-card:hover { border-color: #9ca3af; }
+  .bib-badge {
+    display: inline-block; font-size: .6rem; letter-spacing: .1em;
+    text-transform: uppercase; padding: .12rem .5rem;
+    border-radius: 4px; margin-bottom: .35rem; font-weight: 600;
+  }
+  .bib-digital { background: #eff6ff; color: #1d4ed8; }
+  .bib-libro   { background: #f0fdf4; color: #065f46; }
+  .bib-inst    { background: #fff7ed; color: #c2410c; }
+  .bib-title   { font-family: 'Syne', sans-serif; font-weight: 700; color: var(--ink); margin-bottom: .2rem; }
+  .bib-author  { color: var(--muted); font-size: .74rem; }
+  .bib-link {
+    display: inline-block; margin-top: .3rem; font-size: .71rem;
+    color: #1d4ed8; text-decoration: none;
+    border-bottom: 1px solid #bfdbfe; transition: border-color .2s;
+  }
+  .bib-link:hover { border-color: #1d4ed8; }
+
+  /* eval */
+  .eval-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+  .eval-card {
+    background: var(--bg); border-radius: 10px;
+    padding: 1rem; font-size: .8rem;
+    border-left: 3px solid var(--accent);
+  }
+  .eval-card strong {
+    font-family: 'Syne', sans-serif; font-size: .72rem;
+    letter-spacing: .08em; text-transform: uppercase;
+    display: block; margin-bottom: .4rem; color: #92400e;
+  }
+
+  /* bib panels */
+  .bib-panel { display: none; }
+
+  /* footer */
+  .site-footer {
+    background: var(--ink); color: #6b7280;
+    text-align: center; padding: 2rem;
+    font-size: .7rem; letter-spacing: .1em; text-transform: uppercase;
+  }
+
+  @media (max-width: 640px) { .overview-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media print {
+    .section-body { max-height: none !important; }
+    .top-actions, .chevron { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-tag">Versión Final · Comisión de Programa</div>
+  <h1 class="header-title">Planificación Anual<br><em>Matemática</em></h1>
+  <div class="header-sub">8° año — Educación Básica Integrada (EBI) · DGES</div>
+  <div class="header-meta">
+    <span class="meta-pill">5 horas semanales</span>
+    <span class="meta-pill">32 semanas lectivas</span>
+    <span class="meta-pill">3 bloques temáticos</span>
+    <span class="meta-pill">~160 horas anuales</span>
+  </div>
+</header>
+
+<!-- PROGRESS -->
+<div class="progress-section">
+  <div class="progress-label">Distribución de semanas por bloque y sub-bloque</div>
+  <div class="progress-track">
+    <div class="progress-seg ps-porc" title="Porcentajes: 2 sem"></div>
+    <div class="progress-seg ps-ivp"  title="Índice de variación: 2 sem"></div>
+    <div class="progress-seg ps-prob" title="Probabilidad: 2 sem"></div>
+    <div class="progress-seg ps-alg"  title="Monomios y polinomios: 3 sem"></div>
+    <div class="progress-seg ps-ecin" title="Ecuaciones e inecuaciones: 4 sem"></div>
+    <div class="progress-seg ps-func" title="Funciones f(x)=ax+b: 5 sem"></div>
+    <div class="progress-seg ps-prop" title="Proporcionalidad: 5 sem"></div>
+    <div class="progress-seg ps-nota" title="Rectas y puntos notables: 3 sem"></div>
+    <div class="progress-seg ps-trans" title="Transformaciones: 3 sem"></div>
+    <div class="progress-seg ps-thal" title="Thales y semejanza: 3 sem"></div>
+  </div>
+  <div class="progress-legend">
+    <span class="leg-item"><span class="leg-dot" style="background:var(--porc-col)"></span>Porcentajes (2)</span>
+    <span class="leg-item"><span class="leg-dot" style="background:var(--ivp-col)"></span>Índice variación (2)</span>
+    <span class="leg-item"><span class="leg-dot" style="background:var(--prob-col)"></span>Probabilidad (2)</span>
+    <span class="leg-item"><span class="leg-dot" style="background:var(--alg-col)"></span>Álgebra (3)</span>
+    <span class="leg-item"><span class="leg-dot" style="background:var(--ecin-col)"></span>Ec. e Inec. (4)</span>
+    <span class="leg-item"><span class="leg-dot" style="background:var(--func-col)"></span>Funciones (5)</span>
+    <span class="leg-item"><span class="leg-dot" style="background:var(--prop-col)"></span>Proporcionalidad (5)</span>
+    <span class="leg-item"><span class="leg-dot" style="background:var(--nota-col)"></span>Puntos notables (3)</span>
+    <span class="leg-item"><span class="leg-dot" style="background:var(--trans-col)"></span>Transformaciones (3)</span>
+    <span class="leg-item"><span class="leg-dot" style="background:var(--thal-col)"></span>Thales y semejanza (3)</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="main">
+
+  <div class="top-actions">
+    <button class="btn" onclick="expandAll()">Expandir todo</button>
+    <button class="btn" onclick="collapseAll()">Contraer todo</button>
+    <button class="btn btn-primary" onclick="window.print()">⎙ Imprimir</button>
+  </div>
+
+  <!-- OVERVIEW CARDS -->
+  <div class="overview-grid">
+    <div class="ov-card ov-porc" onclick="toggleSection('b-porc')">
+      <div class="ov-num">2</div><div class="ov-unit">semanas</div>
+      <div class="ov-name">Porcentajes</div>
+      <div class="ov-hint">Aumentos · Descuentos · Contexto real</div>
+    </div>
+    <div class="ov-card ov-ivp" onclick="toggleSection('b-ivp')">
+      <div class="ov-num">2</div><div class="ov-unit">semanas</div>
+      <div class="ov-name">Índice de variación</div>
+      <div class="ov-hint">Factor multiplicador · Encadenamiento</div>
+    </div>
+    <div class="ov-card ov-prob" onclick="toggleSection('b-prob')">
+      <div class="ov-num">2</div><div class="ov-unit">semanas</div>
+      <div class="ov-name">Probabilidad</div>
+      <div class="ov-hint">Laplace · Sucesos dep. e indep.</div>
+    </div>
+    <div class="ov-card ov-alg" onclick="toggleSection('b-alg')">
+      <div class="ov-num">3</div><div class="ov-unit">semanas</div>
+      <div class="ov-name">Monomios y polinomios</div>
+      <div class="ov-hint">Álgebra · Operaciones · Valor numérico</div>
+    </div>
+    <div class="ov-card ov-ecin" onclick="toggleSection('b-ecin')">
+      <div class="ov-num">4</div><div class="ov-unit">semanas</div>
+      <div class="ov-name">Ecuaciones e inecuaciones</div>
+      <div class="ov-hint">1er grado · Intervalos · Modelización</div>
+    </div>
+    <div class="ov-card ov-func" onclick="toggleSection('b-func')">
+      <div class="ov-num">5</div><div class="ov-unit">semanas</div>
+      <div class="ov-name">Funciones f(x) = ax + b</div>
+      <div class="ov-hint">Pendiente · Corte con ejes · GeoGebra</div>
+    </div>
+    <div class="ov-card ov-prop" onclick="toggleSection('b-prop')">
+      <div class="ov-num">5</div><div class="ov-unit">semanas</div>
+      <div class="ov-name">Proporcionalidad</div>
+      <div class="ov-hint">Directa · Inversa · f(x) = kx</div>
+    </div>
+    <div class="ov-card ov-nota" onclick="toggleSection('b-nota')">
+      <div class="ov-num">3</div><div class="ov-unit">semanas</div>
+      <div class="ov-name">Puntos notables</div>
+      <div class="ov-hint">Circuncentro · Incentro · Baricentro</div>
+    </div>
+    <div class="ov-card ov-trans" onclick="toggleSection('b-trans')">
+      <div class="ov-num">3</div><div class="ov-unit">semanas</div>
+      <div class="ov-name">Transformaciones del plano</div>
+      <div class="ov-hint">Traslación · Rotación · Homotecia</div>
+    </div>
+    <div class="ov-card ov-thal" onclick="toggleSection('b-thal')">
+      <div class="ov-num">3</div><div class="ov-unit">semanas</div>
+      <div class="ov-name">Thales y semejanza</div>
+      <div class="ov-hint">Triángulos semejantes · AA · LLL · LAL</div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       BLOQUE NÚMERO
+  ════════════════════════════════════════════════════════ -->
+
+  <!-- ═══ B1: PORCENTAJES ═══ -->
+  <div class="section-block sb-porc" id="b-porc">
+    <div class="section-header" onclick="toggleSection('b-porc')">
+      <div class="section-icon">%</div>
+      <div class="section-title-wrap">
+        <div class="section-title">Porcentajes y variaciones en contexto</div>
+        <div class="section-weeks-badge">2 semanas · 10 horas clase · Bloque: Número</div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(this,'porc','contenidos')" style="background:var(--porc-col);border-color:var(--porc-col);color:#fff">Contenidos</button>
+        <button class="tab-btn" onclick="switchTab(this,'porc','previos')">Conocimientos previos</button>
+        <button class="tab-btn" onclick="switchTab(this,'porc','objetivos')">Objetivos & Evaluación</button>
+        <button class="tab-btn" onclick="switchTab(this,'porc','metodologia')">Metodología</button>
+        <button class="tab-btn" onclick="switchTab(this,'porc','cronograma')">Cronograma</button>
+      </div>
+      <div class="tab-panel active" id="porc-contenidos">
+        <div class="subsection-title">Contenidos del bloque</div>
+        <ul class="content-list">
+          <li><span class="dot"></span>Los porcentajes y su relación con los números racionales</li>
+          <li><span class="dot"></span>Expresión decimal de un porcentaje</li>
+          <li><span class="dot"></span>Aumentos y descuentos sucesivos (porcentajes encadenados)</li>
+          <li><span class="dot"></span>Problemas contextualizados: precios, impuestos, rebajas, población, ahorro y gasto</li>
+          <li><span class="dot"></span>Comparación de variaciones mediante índices</li>
+          <li><span class="dot"></span>Interpretación del valor final e inicial según aumento o disminución total</li>
+        </ul>
+      </div>
+      <div class="tab-panel" id="porc-previos">
+        <div class="subsection-title">Conocimientos previos requeridos</div>
+        <ul class="content-list">
+          <li><span class="dot"></span>Conjuntos numéricos: naturales, enteros, racionales y reales</li>
+          <li><span class="dot"></span>Representación decimal de los números racionales</li>
+          <li><span class="dot"></span>Operatoria básica en ℝ: adición, sustracción, multiplicación y división</li>
+          <li><span class="dot"></span>Propiedades de las operaciones (conmutativa, asociativa, distributiva)</li>
+          <li><span class="dot"></span>Cálculo de porcentajes simples: 10%, 25%, 50%</li>
+          <li><span class="dot"></span>Conversión entre fracciones, decimales y porcentajes</li>
+          <li><span class="dot"></span>Reconocimiento de situaciones de proporcionalidad directa</li>
+        </ul>
+      </div>
+      <div class="tab-panel" id="porc-objetivos">
+        <div class="subsection-title">Objetivos de aprendizaje e indicadores</div>
+        <div class="obj-grid">
+          <div class="obj-card">
+            <div class="obj-label">Variaciones porcentuales</div>
+            <div style="font-size:.8rem;line-height:1.5;">Aplicar aumentos o descuentos sucesivos sobre una cantidad inicial usando procedimientos numéricos o tecnológicos.</div>
+            <br><ul class="indicators-list">
+              <li>Reconoce el porcentaje de incremento o disminución en cada variación sucesiva</li>
+              <li>Elige estrategias adecuadas: cálculo manual, calculadora, tablas, planillas digitales</li>
+              <li>Justifica los procedimientos explicando el sentido de cada variación aplicada</li>
+            </ul>
+          </div>
+          <div class="obj-card">
+            <div class="obj-label">Resolución contextualizada</div>
+            <div style="font-size:.8rem;line-height:1.5;">Resolver problemas que involucren variaciones porcentuales en situaciones reales.</div>
+            <br><ul class="indicators-list">
+              <li>Identifica y aplica el concepto de porcentaje en situaciones de ahorro, gasto y toma de decisiones financieras</li>
+              <li>Resuelve situaciones con dos o más aumentos/descuentos o combinaciones</li>
+              <li>Determina si el valor final es mayor, menor o igual al inicial, justificando el razonamiento</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" id="porc-metodologia">
+        <div class="subsection-title">Sugerencias metodológicas</div>
+        <div class="method-box"><strong>Uso crítico de la calculadora:</strong> Guiar al estudiantado en el proceso de uso de la calculadora como herramienta con un punto de vista crítico, no como sustituto del razonamiento.</div>
+        <div class="method-box"><strong>Comparación de estrategias:</strong> Promover el análisis comparativo de estrategias —mentales, manuales, digitales— para resolver problemas porcentuales, favoreciendo la argumentación sobre cuál es más eficiente.</div>
+        <div class="method-box"><strong>Contextos económicos y financieros:</strong> Trabajar contenidos en contextos de la vida real: ingresos, control de gastos, ahorro, tarifas, inversiones, para que la matemática se conecte con decisiones cotidianas.</div>
+        <div class="method-box"><strong>Diseño de actividades de decisión:</strong> Proponer situaciones donde el estudiantado compare opciones basadas en variaciones porcentuales (promociones, tarifas, deportes, clima) y fundamente su elección.</div>
+      </div>
+      <div class="tab-panel" id="porc-cronograma">
+        <div class="subsection-title">Distribución semanal sugerida</div>
+        <div class="timeline">
+          <div class="week-row"><div class="week-label">Semana 1</div><div class="week-bar wbar-porc">Porcentajes y racionales · Expresión decimal · Aumentos y descuentos simples</div></div>
+          <div class="week-row"><div class="week-label">Semana 2</div><div class="week-bar wbar-porc">Aumentos y descuentos sucesivos · Problemas contextualizados · Comparación de variaciones</div></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- ═══ B2: ÍNDICE DE VARIACIÓN ═══ -->
+  <div class="section-block sb-ivp" id="b-ivp">
+    <div class="section-header" onclick="toggleSection('b-ivp')">
+      <div class="section-icon">×</div>
+      <div class="section-title-wrap">
+        <div class="section-title">Índice de variación porcentual como factor multiplicador</div>
+        <div class="section-weeks-badge">2 semanas · 10 horas clase · Bloque: Número</div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(this,'ivp','contenidos')" style="background:var(--ivp-col);border-color:var(--ivp-col);color:#fff">Contenidos</button>
+        <button class="tab-btn" onclick="switchTab(this,'ivp','previos')">Conocimientos previos</button>
+        <button class="tab-btn" onclick="switchTab(this,'ivp','objetivos')">Objetivos & Evaluación</button>
+        <button class="tab-btn" onclick="switchTab(this,'ivp','metodologia')">Metodología</button>
+        <button class="tab-btn" onclick="switchTab(this,'ivp','cronograma')">Cronograma</button>
+      </div>
+      <div class="tab-panel active" id="ivp-contenidos">
+        <div class="subsection-title">Contenidos del bloque</div>
+        <ul class="content-list">
+          <li><span class="dot"></span>Índice de variación porcentual como factor multiplicador</li>
+          <li><span class="dot"></span>Reconocimiento de que la aplicación encadenada de porcentajes no equivale a sumar o restar los porcentajes involucrados</li>
+          <li><span class="dot"></span>Efecto multiplicativo de las variaciones porcentuales sucesivas</li>
+          <li><span class="dot"></span>Modelización de situaciones de aumentos y disminuciones sucesivas con el índice de variación</li>
+          <li><span class="dot"></span>Ejemplo ilustrativo: descuento de IVA del 18,03% y su diferencia con el 22% original</li>
+        </ul>
+      </div>
+      <div class="tab-panel" id="ivp-previos">
+        <div class="subsection-title">Conocimientos previos requeridos</div>
+        <ul class="content-list">
+          <li><span class="dot"></span>Porcentajes simples y su relación con fracciones y decimales</li>
+          <li><span class="dot"></span>Aumentos y descuentos porcentuales simples</li>
+          <li><span class="dot"></span>Operatoria con números reales, incluyendo multiplicación</li>
+          <li><span class="dot"></span>Propiedad asociativa de la multiplicación</li>
+        </ul>
+      </div>
+      <div class="tab-panel" id="ivp-objetivos">
+        <div class="subsection-title">Objetivos de aprendizaje e indicadores</div>
+        <div class="obj-grid">
+          <div class="obj-card">
+            <div class="obj-label">Efecto multiplicativo vs. aditivo</div>
+            <div style="font-size:.8rem;line-height:1.5;">Reconocer y explicar por qué los porcentajes encadenados no se suman ni se restan.</div>
+            <br><ul class="indicators-list">
+              <li>Compara e interpreta el efecto multiplicativo usando ejemplos numéricos o de contexto real</li>
+              <li>Explica situaciones cotidianas donde asumir que se suman los porcentajes induce a error</li>
+              <li>Justifica casos reales como el descuento del IVA (18,03%) a partir del encadenamiento</li>
+            </ul>
+          </div>
+          <div class="obj-card">
+            <div class="obj-label">Índice de variación</div>
+            <div style="font-size:.8rem;line-height:1.5;">Identificar, interpretar y emplear el índice de variación porcentual como factor multiplicador.</div>
+            <br><ul class="indicators-list">
+              <li>Usa el índice de variación para modelar aumentos y disminuciones sucesivas</li>
+              <li>Reconoce el porcentaje de aumento o disminución a partir del índice correspondiente</li>
+              <li>Decide la conveniencia entre distintas situaciones comparando sus índices de variación</li>
+              <li>Infiere la relación entre el valor inicial y final conociendo el índice</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" id="ivp-metodologia">
+        <div class="subsection-title">Sugerencias metodológicas</div>
+        <div class="method-box"><strong>Analogía con el error cotidiano:</strong> Plantear situaciones donde la confusión entre efecto aditivo y multiplicativo lleva a errores (ej: "si sube 20% y baja 20% vuelvo al mismo precio") para generar conflicto cognitivo productivo.</div>
+        <div class="method-box"><strong>Planillas digitales:</strong> Usar planillas para modelizar encadenamientos y visualizar el efecto multiplicador. El estudiantado puede modificar porcentajes y observar el impacto sobre el valor final.</div>
+        <div class="method-box"><strong>Comparación de índices para decisiones:</strong> Diseñar actividades donde el estudiantado compare índices de variación para tomar decisiones fundamentadas: qué descuento es más conveniente, qué inversión crece más.</div>
+      </div>
+      <div class="tab-panel" id="ivp-cronograma">
+        <div class="subsection-title">Distribución semanal sugerida</div>
+        <div class="timeline">
+          <div class="week-row"><div class="week-label">Semana 3</div><div class="week-bar wbar-ivp">Índice de variación · Factor multiplicador · Efecto no aditivo</div></div>
+          <div class="week-row"><div class="week-label">Semana 4</div><div class="week-bar wbar-ivp">Modelización · Comparación de índices · Ejemplo IVA y descuentos encadenados</div></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- ═══ B3: PROBABILIDAD ═══ -->
+  <div class="section-block sb-prob" id="b-prob">
+    <div class="section-header" onclick="toggleSection('b-prob')">
+      <div class="section-icon">🎲</div>
+      <div class="section-title-wrap">
+        <div class="section-title">Probabilidad: sucesos dependientes e independientes</div>
+        <div class="section-weeks-badge">2 semanas · 10 horas clase · Bloque: Número</div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(this,'prob','contenidos')" style="background:var(--prob-col);border-color:var(--prob-col);color:#fff">Contenidos</button>
+        <button class="tab-btn" onclick="switchTab(this,'prob','previos')">Conocimientos previos</button>
+        <button class="tab-btn" onclick="switchTab(this,'prob','objetivos')">Objetivos & Evaluación</button>
+        <button class="tab-btn" onclick="switchTab(this,'prob','metodologia')">Metodología</button>
+        <button class="tab-btn" onclick="switchTab(this,'prob','cronograma')">Cronograma</button>
+      </div>
+      <div class="tab-panel active" id="prob-contenidos">
+        <div class="subsection-title">Contenidos del bloque</div>
+        <ul class="content-list">
+          <li><span class="dot"></span>Clasificación de sucesos</li>
+          <li><span class="dot"></span>Probabilidad de sucesos dependientes e independientes</li>
+          <li><span class="dot"></span>Regla de Laplace: repaso y profundización</li>
+          <li><span class="dot"></span>Probabilidad de la intersección de sucesos independientes</li>
+          <li><span class="dot"></span>Interpretación de resultados probabilísticos en contextos cotidianos</li>
+        </ul>
+      </div>
+      <div class="tab-panel" id="prob-previos">
+        <div class="subsection-title">Conocimientos previos requeridos</div>
+        <ul class="content-list">
+          <li><span class="dot"></span>Experimento aleatorio, espacio muestral y suceso</li>
+          <li><span class="dot"></span>Definición de Laplace: casos favorables / casos posibles</li>
+          <li><span class="dot"></span>Técnicas de conteo: diagrama de árbol y tabla de doble entrada</li>
+          <li><span class="dot"></span>Fracciones, decimales y porcentajes (para expresar probabilidades)</li>
+        </ul>
+      </div>
+      <div class="tab-panel" id="prob-objetivos">
+        <div class="subsection-title">Objetivos de aprendizaje e indicadores</div>
+        <div class="obj-grid">
+          <div class="obj-card">
+            <div class="obj-label">Regla de Laplace</div>
+            <div style="font-size:.8rem;line-height:1.5;">Aplicar la regla de Laplace para calcular probabilidades de sucesos simples y compuestos.</div>
+            <br><ul class="indicators-list">
+              <li>Calcula probabilidades de sucesos simples y compuestos</li>
+              <li>Interpreta resultados probabilísticos en situaciones reales o cotidianas</li>
+              <li>Compara la probabilidad de distintos sucesos usando distintos registros (%, fracción, decimal)</li>
+              <li>Formula hipótesis sobre sucesos aleatorios y las analiza con Laplace</li>
+            </ul>
+          </div>
+          <div class="obj-card">
+            <div class="obj-label">Dependencia e independencia</div>
+            <div style="font-size:.8rem;line-height:1.5;">Reconocer si dos sucesos son dependientes o independientes y calcular probabilidades.</div>
+            <br><ul class="indicators-list">
+              <li>Estudia la dependencia o independencia entre dos sucesos, elabora conjeturas y las valida</li>
+              <li>Analiza cómo las relaciones entre sucesos inciden en los resultados</li>
+              <li>Formula estrategias para calcular la probabilidad de dos sucesos independientes y las generaliza</li>
+              <li>Resuelve problemas usando la regla de Laplace y la probabilidad de la intersección; valida con simuladores</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" id="prob-metodologia">
+        <div class="subsection-title">Sugerencias metodológicas</div>
+        <div class="method-box"><strong>Retomar Laplace desde experiencias cercanas:</strong> Vincular la definición de Laplace con experimentos aleatorios del entorno del estudiantado (dados, monedas, cartas, urnas) antes de avanzar hacia situaciones más abstractas.</div>
+        <div class="method-box"><strong>Simuladores digitales:</strong> Promover el uso de herramientas informáticas para modelizar experimentos aleatorios. Los simuladores permiten visualizar la ley de los grandes números sin profundizar en análisis estadístico.</div>
+        <div class="method-box"><strong>Integración con Ciencias Sociales y DDHH:</strong> Diseñar experiencias que integren probabilidad y contextos sociales, examinando situaciones vinculadas a los derechos humanos y a la perspectiva de género mediante datos reales.</div>
+        <div class="method-box"><strong>Comprensión de la incertidumbre:</strong> Favorecer el análisis de situaciones que involucren el azar en contextos cotidianos, desarrollando la capacidad de estimar, comparar y justificar probabilidades mediante la experimentación y el razonamiento.</div>
+      </div>
+      <div class="tab-panel" id="prob-cronograma">
+        <div class="subsection-title">Distribución semanal sugerida</div>
+        <div class="timeline">
+          <div class="week-row"><div class="week-label">Semana 5</div><div class="week-bar wbar-prob">Clasificación de sucesos · Laplace · Sucesos simples y compuestos</div></div>
+          <div class="week-row"><div class="week-label">Semana 6</div><div class="week-bar wbar-prob">Sucesos dependientes e independientes · Intersección · Simuladores</div></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       BLOQUE VARIABLE
+  ════════════════════════════════════════════════════════ -->
+
+  <!-- ═══ B4: ÁLGEBRA / POLINOMIOS ═══ -->
+  <div class="section-block sb-alg" id="b-alg">
+    <div class="section-header" onclick="toggleSection('b-alg')">
+      <div class="section-icon">x²</div>
+      <div class="section-title-wrap">
+        <div class="section-title">Monomios, polinomios y expresiones algebraicas</div>
+        <div class="section-weeks-badge">3 semanas · 15 horas clase · Bloque: Variable</div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(this,'alg','contenidos')" style="background:var(--alg-col);border-color:var(--alg-col);color:#fff">Contenidos</button>
+        <button class="tab-btn" onclick="switchTab(this,'alg','previos')">Conocimientos previos</button>
+        <button class="tab-btn" onclick="switchTab(this,'alg','objetivos')">Objetivos & Evaluación</button>
+        <button class="tab-btn" onclick="switchTab(this,'alg','metodologia')">Metodología</button>
+        <button class="tab-btn" onclick="switchTab(this,'alg','cronograma')">Cronograma</button>
+      </div>
+      <div class="tab-panel active" id="alg-contenidos">
+        <div class="subsection-title">Contenidos del bloque</div>
+        <ul class="content-list">
+          <li><span class="dot"></span>Variables, constantes, coeficientes y términos</li>
+          <li><span class="dot"></span>Monomios: estructura, grado y operaciones básicas</li>
+          <li><span class="dot"></span>Polinomios: clasificación según grado y cantidad de términos (monomio, binomio, trinomio)</li>
+          <li><span class="dot"></span>Operaciones con polinomios: adición, sustracción y multiplicación</li>
+          <li><span class="dot"></span>Cálculo del valor numérico de un polinomio para un valor dado de la variable</li>
+          <li><span class="dot"></span>Identificación de las raíces de un polinomio</li>
+          <li><span class="dot"></span>Aplicación de propiedades (conmutativa, asociativa, distributiva)</li>
+        </ul>
+      </div>
+      <div class="tab-panel" id="alg-previos">
+        <div class="subsection-title">Conocimientos previos requeridos</div>
+        <ul class="content-list">
+          <li><span class="dot"></span>Conjuntos numéricos y operatoria en ℝ</li>
+          <li><span class="dot"></span>Uso del lenguaje algebraico: interpretación de expresiones simples</li>
+          <li><span class="dot"></span>Reconocimiento y usos de la variable como magnitud que puede cambiar</li>
+          <li><span class="dot"></span>Resolución intuitiva de ecuaciones de primer grado</li>
+          <li><span class="dot"></span>Propiedades de las operaciones</li>
+          <li><span class="dot"></span>Potencias de exponente natural</li>
+        </ul>
+      </div>
+      <div class="tab-panel" id="alg-objetivos">
+        <div class="subsection-title">Objetivos de aprendizaje e indicadores</div>
+        <div class="obj-grid">
+          <div class="obj-card">
+            <div class="obj-label">Reconocimiento y clasificación</div>
+            <div style="font-size:.8rem;line-height:1.5;">Reconocer, analizar y clasificar expresiones algebraicas; diferenciar coeficientes, variables y grado.</div>
+            <br><ul class="indicators-list">
+              <li>Identifica expresiones algebraicas en formatos verbales, tabulares o simbólicos</li>
+              <li>Clasifica según cantidad de términos: monomio, binomio, trinomio, polinomio</li>
+              <li>Caracteriza los monomios (coeficiente, variable, parte literal, grado)</li>
+              <li>Determina cuándo un polinomio está reducido, ordenado y/o completo</li>
+            </ul>
+          </div>
+          <div class="obj-card">
+            <div class="obj-label">Operaciones y modelización</div>
+            <div style="font-size:.8rem;line-height:1.5;">Operar con polinomios y aplicarlos a la modelización de situaciones reales.</div>
+            <br><ul class="indicators-list">
+              <li>Realiza adiciones, sustracciones y multiplicaciones de polinomios</li>
+              <li>Aplica propiedades (distributiva, asociativa, conmutativa) para simplificar expresiones</li>
+              <li>Calcula el valor numérico sustituyendo correctamente la variable</li>
+              <li>Modeliza mediante polinomios situaciones vinculadas a perímetros, áreas y volúmenes</li>
+              <li>Identifica raíces de un polinomio por sustitución o resolución de ecuaciones</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" id="alg-metodologia">
+        <div class="subsection-title">Sugerencias metodológicas</div>
+        <div class="method-box"><strong>Generalización de patrones:</strong> Iniciar con la generalización de patrones numéricos y geométricos, promoviendo la transición gradual del lenguaje coloquial al simbólico.</div>
+        <div class="method-box"><strong>Propiedad distributiva como eje:</strong> Aplicar la distributiva en expresiones algebraicas, priorizando el desarrollo y la comprensión antes que la mecanización.</div>
+        <div class="method-box"><strong>Equivalencias entre expresiones:</strong> Proponer actividades de comparación de expresiones algebraicas equivalentes, reconociendo estrategias eficientes y justificando procedimientos.</div>
+        <div class="method-box"><strong>Tecnología para verificación:</strong> Usar calculadora o software para verificar operaciones o equivalencias, evaluando críticamente los resultados obtenidos mediante tecnología y comparándolos con procedimientos manuales.</div>
+      </div>
+      <div class="tab-panel" id="alg-cronograma">
+        <div class="subsection-title">Distribución semanal sugerida</div>
+        <div class="timeline">
+          <div class="week-row"><div class="week-label">Semana 7</div><div class="week-bar wbar-alg">Variables, constantes, monomios · Estructura y grado · Semejanza</div></div>
+          <div class="week-row"><div class="week-label">Semana 8</div><div class="week-bar wbar-alg">Polinomios · Clasificación · Adición y sustracción</div></div>
+          <div class="week-row"><div class="week-label">Semana 9</div><div class="week-bar wbar-alg">Multiplicación · Valor numérico · Raíces · Modelización</div></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- ═══ B5: ECUACIONES E INECUACIONES ═══ -->
+  <div class="section-block sb-ecin" id="b-ecin">
+    <div class="section-header" onclick="toggleSection('b-ecin')">
+      <div class="section-icon">≤</div>
+      <div class="section-title-wrap">
+        <div class="section-title">Ecuaciones e inecuaciones de primer grado</div>
+        <div class="section-weeks-badge">4 semanas · 20 horas clase · Bloque: Variable</div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(this,'ecin','contenidos')" style="background:var(--ecin-col);border-color:var(--ecin-col);color:#fff">Contenidos</button>
+        <button class="tab-btn" onclick="switchTab(this,'ecin','previos')">Conocimientos previos</button>
+        <button class="tab-btn" onclick="switchTab(this,'ecin','objetivos')">Objetivos & Evaluación</button>
+        <button class="tab-btn" onclick="switchTab(this,'ecin','metodologia')">Metodología</button>
+        <button class="tab-btn" onclick="switchTab(this,'ecin','cronograma')">Cronograma</button>
+      </div>
+      <div class="tab-panel active" id="ecin-contenidos">
+        <div class="subsection-title">Contenidos del bloque</div>
+        <ul class="content-list">
+          <li><span class="dot"></span>Planteo y resolución de ecuaciones e inecuaciones mediante distintas estrategias</li>
+          <li><span class="dot"></span>Comprobación de soluciones desde el enfoque matemático y contextual</li>
+          <li><span class="dot"></span>Representación del conjunto solución de ecuaciones e inecuaciones</li>
+          <li><span class="dot"></span>Uso de intervalos de números reales para representar soluciones de inecuaciones</li>
+          <li><span class="dot"></span>Resolución de f(x)=k, f(x)=g(x), f(x)&lt;k, f(x)&gt;k, f(x)&lt;g(x), f(x)&gt;g(x), donde f y g son funciones polinómicas de primer grado</li>
+        </ul>
+      </div>
+      <div class="tab-panel" id="ecin-previos">
+        <div class="subsection-title">Conocimientos previos requeridos</div>
+        <ul class="content-list">
+          <li><span class="dot"></span>Operatoria en ℝ y propiedades de las operaciones</li>
+          <li><span class="dot"></span>Uso del lenguaje algebraico y expresiones con variables</li>
+          <li><span class="dot"></span>Resolución intuitiva de ecuaciones de primer grado (operaciones inversas)</li>
+          <li><span class="dot"></span>Desigualdades e intervalos numéricos (noción básica)</li>
+        </ul>
+      </div>
+      <div class="tab-panel" id="ecin-objetivos">
+        <div class="subsection-title">Objetivos de aprendizaje e indicadores</div>
+        <div class="obj-grid">
+          <div class="obj-card">
+            <div class="obj-label">Estrategias de resolución</div>
+            <div style="font-size:.8rem;line-height:1.5;">Aplicar distintas estrategias para resolver ecuaciones e inecuaciones de primer grado.</div>
+            <br><ul class="indicators-list">
+              <li>Discute, elabora y descubre estrategias apoyándose en analogías (balanza de dos platillos)</li>
+              <li>Emplea propiedades de las operaciones para obtener expresiones equivalentes</li>
+              <li>Comprueba si la solución es válida desde el punto de vista matemático y del contexto</li>
+            </ul>
+          </div>
+          <div class="obj-card">
+            <div class="obj-label">Notación y modelización</div>
+            <div style="font-size:.8rem;line-height:1.5;">Escribir correctamente el conjunto solución y modelizar situaciones mediante ecuaciones e inecuaciones.</div>
+            <br><ul class="indicators-list">
+              <li>Usa notación de conjuntos para expresar soluciones de ecuaciones</li>
+              <li>Emplea intervalos de números reales para representar soluciones de inecuaciones</li>
+              <li>Plantea ecuaciones e inecuaciones a partir de problemas reales eligiendo procedimientos apropiados</li>
+              <li>Aplica conocimientos sobre funciones para resolver igualdades y desigualdades del tipo f(x)=g(x)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" id="ecin-metodologia">
+        <div class="subsection-title">Sugerencias metodológicas</div>
+        <div class="method-box"><strong>Múltiples estrategias:</strong> Promover la resolución mediante representaciones gráficas, análisis de tablas, uso de tecnologías y cálculo algebraico, priorizando la comprensión sobre la mecanización.</div>
+        <div class="method-box"><strong>Analogía de la balanza:</strong> Favorecer el uso de la balanza de dos platillos como apoyo para construir significado sobre igualdad y desigualdad, justificando la validez de los procedimientos utilizados.</div>
+        <div class="method-box"><strong>Contextos variados e interdisciplinarios:</strong> Integrar ecuaciones e inecuaciones en situaciones vinculadas a ciencias, economía y ciudadanía. Trabajar con soluciones pertenecientes a diferentes conjuntos numéricos.</div>
+        <div class="method-box"><strong>Verificación como práctica sistemática:</strong> Instalar la verificación como paso inherente al proceso de resolución, no como apéndice opcional: sustituir valores para confirmar la solución de toda ecuación o inecuación.</div>
+      </div>
+      <div class="tab-panel" id="ecin-cronograma">
+        <div class="subsection-title">Distribución semanal sugerida</div>
+        <div class="timeline">
+          <div class="week-row"><div class="week-label">Semana 10</div><div class="week-bar wbar-ecin">Ecuaciones de primer grado · Estrategias · Analogía de la balanza</div></div>
+          <div class="week-row"><div class="week-label">Semana 11</div><div class="week-bar wbar-ecin">Conjunto solución · Comprobación · Notación matemática</div></div>
+          <div class="week-row"><div class="week-label">Semana 12</div><div class="week-bar wbar-ecin">Inecuaciones · Intervalos · Representación del conjunto solución</div></div>
+          <div class="week-row"><div class="week-label">Semana 13</div><div class="week-bar wbar-ecin">f(x)=g(x), f(x)&lt;g(x) · Modelización contextualizada</div></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- ═══ B6: FUNCIONES ═══ -->
+  <div class="section-block sb-func" id="b-func">
+    <div class="section-header" onclick="toggleSection('b-func')">
+      <div class="section-icon">f(x)</div>
+      <div class="section-title-wrap">
+        <div class="section-title">Funciones polinómicas de la forma f(x) = ax + b</div>
+        <div class="section-weeks-badge">5 semanas · 25 horas clase · Bloque: Variable</div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(this,'func','contenidos')" style="background:var(--func-col);border-color:var(--func-col);color:#fff">Contenidos</button>
+        <button class="tab-btn" onclick="switchTab(this,'func','previos')">Conocimientos previos</button>
+        <button class="tab-btn" onclick="switchTab(this,'func','objetivos')">Objetivos & Evaluación</button>
+        <button class="tab-btn" onclick="switchTab(this,'func','metodologia')">Metodología</button>
+        <button class="tab-btn" onclick="switchTab(this,'func','cronograma')">Cronograma</button>
+      </div>
+      <div class="tab-panel active" id="func-contenidos">
+        <div class="subsection-title">Contenidos del bloque</div>
+        <ul class="content-list">
+          <li><span class="dot"></span>Identificación de funciones en distintas representaciones: verbal, tabular, gráfico, analítico, diagramas</li>
+          <li><span class="dot"></span>Dominio y recorrido según el contexto</li>
+          <li><span class="dot"></span>Funciones f(x) = ax + b: tablas de valores y gráficos</li>
+          <li><span class="dot"></span>Caracterización y análisis de los coeficientes a y b</li>
+          <li><span class="dot"></span>Puntos de corte con los ejes coordenados e interpretación en contexto</li>
+          <li><span class="dot"></span>Relación entre a y b y las características de la función (crecimiento, pendiente, posición del gráfico)</li>
+        </ul>
+      </div>
+      <div class="tab-panel" id="func-previos">
+        <div class="subsection-title">Conocimientos previos requeridos</div>
+        <ul class="content-list">
+          <li><span class="dot"></span>Lectura e interpretación de tablas, gráficos y expresiones verbales para describir relaciones entre cantidades</li>
+          <li><span class="dot"></span>Reconocimiento de situaciones de proporcionalidad directa</li>
+          <li><span class="dot"></span>Plano cartesiano y coordenadas</li>
+          <li><span class="dot"></span>Resolución de ecuaciones e inecuaciones de primer grado</li>
+          <li><span class="dot"></span>Expresiones algebraicas y valor numérico</li>
+        </ul>
+      </div>
+      <div class="tab-panel" id="func-objetivos">
+        <div class="subsection-title">Objetivos de aprendizaje e indicadores</div>
+        <div class="obj-grid">
+          <div class="obj-card">
+            <div class="obj-label">Identificación y representación</div>
+            <div style="font-size:.8rem;line-height:1.5;">Identificar funciones y relacionar distintas representaciones de una misma función.</div>
+            <br><ul class="indicators-list">
+              <li>Reconoce relaciones que corresponden o no a una función analizando tablas, gráficos o expresiones</li>
+              <li>Articula los lenguajes tabular, simbólico, gráfico y verbal mostrando que refieren a la misma correspondencia</li>
+              <li>Identifica el dominio pertinente para una función que modeliza una situación real</li>
+            </ul>
+          </div>
+          <div class="obj-card">
+            <div class="obj-label">Análisis de coeficientes a y b</div>
+            <div style="font-size:.8rem;line-height:1.5;">Analizar f(x)=ax+b y establecer relaciones entre a, b y las características de la función.</div>
+            <br><ul class="indicators-list">
+              <li>Produce tablas de valores, gráficos y expresiones simbólicas de f(x)=ax+b</li>
+              <li>Establece relaciones entre los valores de a y b con crecimiento, pendiente y posición del gráfico</li>
+              <li>Identifica y determina los puntos de corte con los ejes coordenados</li>
+              <li>Determina los coeficientes de una función a partir de gráficos o tablas</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" id="func-metodologia">
+        <div class="subsection-title">Sugerencias metodológicas</div>
+        <div class="method-box"><strong>Múltiples representaciones:</strong> Proponer actividades que impliquen alternar y articular representaciones (tabular, gráfico, analítico, verbal), reconociendo lo que cada una aporta para describir o analizar un mismo fenómeno.</div>
+        <div class="method-box"><strong>GeoGebra para explorar coeficientes:</strong> Incorporar herramientas digitales para explorar variaciones de a y b, modificar coeficientes y observar el efecto sobre gráficos y tablas en tiempo real.</div>
+        <div class="method-box"><strong>Comprensión antes que formalismo:</strong> Favorecer la comprensión del concepto de función mediante el análisis de relaciones entre variables en situaciones reales, evitando una introducción exclusivamente formal.</div>
+        <div class="method-box"><strong>Situaciones reales como punto de partida:</strong> Usar contextos auténticos (movimiento, producción, consumo) para evidenciar cómo cambian las magnitudes y qué información aporta cada representación.</div>
+      </div>
+      <div class="tab-panel" id="func-cronograma">
+        <div class="subsection-title">Distribución semanal sugerida</div>
+        <div class="timeline">
+          <div class="week-row"><div class="week-label">Semana 14</div><div class="week-bar wbar-func">Concepto de función · Representaciones múltiples · Dominio y recorrido</div></div>
+          <div class="week-row"><div class="week-label">Semana 15</div><div class="week-bar wbar-func">f(x)=ax+b · Tablas y gráficos · Coeficiente b (ordenada al origen)</div></div>
+          <div class="week-row"><div class="week-label">Semana 16</div><div class="week-bar wbar-func">Coeficiente a (pendiente) · Crecimiento y decrecimiento · Análisis gráfico</div></div>
+          <div class="week-row"><div class="week-label">Semana 17</div><div class="week-bar wbar-func">Puntos de corte con los ejes · Relación entre a, b y características</div></div>
+          <div class="week-row"><div class="week-label">Semana 18</div><div class="week-bar wbar-func">Determinación de coeficientes desde gráficos · Modelización · GeoGebra</div></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- ═══ B7: PROPORCIONALIDAD ═══ -->
+  <div class="section-block sb-prop" id="b-prop">
+    <div class="section-header" onclick="toggleSection('b-prop')">
+      <div class="section-icon">∝</div>
+      <div class="section-title-wrap">
+        <div class="section-title">Proporcionalidad directa e inversa · f(x) = kx</div>
+        <div class="section-weeks-badge">5 semanas · 25 horas clase · Bloque: Variable</div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(this,'prop','contenidos')" style="background:var(--prop-col);border-color:var(--prop-col);color:#fff">Contenidos</button>
+        <button class="tab-btn" onclick="switchTab(this,'prop','previos')">Conocimientos previos</button>
+        <button class="tab-btn" onclick="switchTab(this,'prop','objetivos')">Objetivos & Evaluación</button>
+        <button class="tab-btn" onclick="switchTab(this,'prop','metodologia')">Metodología</button>
+        <button class="tab-btn" onclick="switchTab(this,'prop','cronograma')">Cronograma</button>
+      </div>
+      <div class="tab-panel active" id="prop-contenidos">
+        <div class="subsection-title">Contenidos del bloque</div>
+        <ul class="content-list">
+          <li><span class="dot"></span>Identificación de situaciones de proporcionalidad directa e inversa</li>
+          <li><span class="dot"></span>Determinación e interpretación de la constante de proporcionalidad k</li>
+          <li><span class="dot"></span>Función de proporcionalidad directa f(x) = kx, k ≠ 0</li>
+          <li><span class="dot"></span>Representación mediante tablas, expresiones analíticas, gráficos y lenguaje coloquial</li>
+          <li><span class="dot"></span>Modelización y resolución de problemas con magnitudes proporcionales</li>
+          <li><span class="dot"></span>Diferenciación entre proporcionalidad directa, linealidad y no linealidad</li>
+        </ul>
+      </div>
+      <div class="tab-panel" id="prop-previos">
+        <div class="subsection-title">Conocimientos previos requeridos</div>
+        <ul class="content-list">
+          <li><span class="dot"></span>Reconocimiento de situaciones de proporcionalidad directa: precio–cantidad, distancia–tiempo, escalas</li>
+          <li><span class="dot"></span>Uso de razones y proporciones en situaciones simples</li>
+          <li><span class="dot"></span>Cálculo de porcentajes simples</li>
+          <li><span class="dot"></span>Funciones de la forma f(x)=ax+b y concepto de función</li>
+        </ul>
+      </div>
+      <div class="tab-panel" id="prop-objetivos">
+        <div class="subsection-title">Objetivos de aprendizaje e indicadores</div>
+        <div class="obj-grid">
+          <div class="obj-card">
+            <div class="obj-label">Identificación y constante k</div>
+            <div style="font-size:.8rem;line-height:1.5;">Reconocer situaciones de proporcionalidad directa e inversa; determinar la constante k.</div>
+            <br><ul class="indicators-list">
+              <li>Identifica situaciones de proporcionalidad directa e inversa usando tablas, gráficos y enunciados</li>
+              <li>Diferencia cuándo la relación es proporcionalidad directa o inversa con ejemplos concretos</li>
+              <li>Determina la constante k a partir de tablas, gráficos o descripciones verbales</li>
+              <li>Interpreta el incremento o disminución proporcional en distintas situaciones</li>
+            </ul>
+          </div>
+          <div class="obj-card">
+            <div class="obj-label">Representación y modelización</div>
+            <div style="font-size:.8rem;line-height:1.5;">Usar distintas representaciones para visualizar proporcionalidad; modelizar con f(x)=kx.</div>
+            <br><ul class="indicators-list">
+              <li>Representa relaciones de proporcionalidad mediante tablas, gráficos, expresiones analíticas y lenguaje coloquial</li>
+              <li>Describe cómo varía una magnitud cuando la otra se duplica, triplica o disminuye</li>
+              <li>Aplica f(x)=kx a problemas contextualizados (fenómenos físicos, situaciones económicas)</li>
+              <li>Comunica resultados con claridad diferenciando proporcionalidad directa, lineal y no lineal</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" id="prop-metodologia">
+        <div class="subsection-title">Sugerencias metodológicas</div>
+        <div class="method-box"><strong>Asociar con f(x)=ax+b:</strong> Abordar el contenido proporcionalidad directa asociado al concepto estructurante de función, presentando la proporcionalidad inversa como contrapunto.</div>
+        <div class="method-box"><strong>Actividades de comparación:</strong> Diseñar actividades de comparación entre proporcionalidad directa, linealidad y no linealidad para evitar confusiones frecuentes. El coeficiente b=0 distingue proporcionalidad directa de linealidad.</div>
+        <div class="method-box"><strong>Contextos auténticos:</strong> Usar movimiento, escalas, consumo, densidad, velocidad y producción para evidenciar cómo cambian las magnitudes en cada tipo de proporcionalidad.</div>
+        <div class="method-box"><strong>Análisis crítico:</strong> Promover el análisis de situaciones reales donde la proporcionalidad no se cumple, desarrollando pensamiento crítico sobre la aplicabilidad del modelo.</div>
+      </div>
+      <div class="tab-panel" id="prop-cronograma">
+        <div class="subsection-title">Distribución semanal sugerida</div>
+        <div class="timeline">
+          <div class="week-row"><div class="week-label">Semana 19</div><div class="week-bar wbar-prop">Proporcionalidad directa · Constante k · Razón de proporcionalidad</div></div>
+          <div class="week-row"><div class="week-label">Semana 20</div><div class="week-bar wbar-prop">f(x)=kx · Representaciones múltiples · Proporcionalidad vs. linealidad</div></div>
+          <div class="week-row"><div class="week-label">Semana 21</div><div class="week-bar wbar-prop">Proporcionalidad inversa · Identificación y contraste con la directa</div></div>
+          <div class="week-row"><div class="week-label">Semana 22</div><div class="week-bar wbar-prop">Modelización: contextos físicos, económicos, escalas</div></div>
+          <div class="week-row"><div class="week-label">Semana 23</div><div class="week-bar wbar-prop">Análisis crítico de situaciones no proporcionales · Integración y síntesis</div></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       BLOQUE GEOMETRÍA
+  ════════════════════════════════════════════════════════ -->
+
+  <!-- ═══ B8: PUNTOS NOTABLES ═══ -->
+  <div class="section-block sb-nota" id="b-nota">
+    <div class="section-header" onclick="toggleSection('b-nota')">
+      <div class="section-icon">△</div>
+      <div class="section-title-wrap">
+        <div class="section-title">Rectas y puntos notables del triángulo</div>
+        <div class="section-weeks-badge">3 semanas · 15 horas clase · Bloque: Geometría</div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(this,'nota','contenidos')" style="background:var(--nota-col);border-color:var(--nota-col);color:#fff">Contenidos</button>
+        <button class="tab-btn" onclick="switchTab(this,'nota','previos')">Conocimientos previos</button>
+        <button class="tab-btn" onclick="switchTab(this,'nota','objetivos')">Objetivos & Evaluación</button>
+        <button class="tab-btn" onclick="switchTab(this,'nota','metodologia')">Metodología</button>
+        <button class="tab-btn" onclick="switchTab(this,'nota','cronograma')">Cronograma</button>
+      </div>
+      <div class="tab-panel active" id="nota-contenidos">
+        <div class="subsection-title">Contenidos del bloque</div>
+        <ul class="content-list">
+          <li><span class="dot"></span>Rectas notables del triángulo: mediatrices, bisectrices, medianas y alturas</li>
+          <li><span class="dot"></span>Puntos notables: circuncentro, incentro, baricentro y ortocentro</li>
+          <li><span class="dot"></span>Circunferencia circunscripta e inscripta al triángulo</li>
+          <li><span class="dot"></span>Construcción de ángulos particulares (90°, 45°, 60°, 30°) integrando mediatriz y bisectriz</li>
+        </ul>
+      </div>
+      <div class="tab-panel" id="nota-previos">
+        <div class="subsection-title">Conocimientos previos requeridos</div>
+        <ul class="content-list">
+          <li><span class="dot"></span>Triángulo: concepto, clasificaciones y propiedades básicas</li>
+          <li><span class="dot"></span>Construcción de triángulos a partir de datos sobre lados y ángulos</li>
+          <li><span class="dot"></span>Mediatriz de un segmento: definición, propiedades y construcción</li>
+          <li><span class="dot"></span>Bisectriz de un ángulo convexo: definición, propiedades y construcción</li>
+          <li><span class="dot"></span>Lectura y descripción de simetrías axiales</li>
+        </ul>
+      </div>
+      <div class="tab-panel" id="nota-objetivos">
+        <div class="subsection-title">Objetivos de aprendizaje e indicadores</div>
+        <div class="obj-grid">
+          <div class="obj-card">
+            <div class="obj-label">Construcción y localización</div>
+            <div style="font-size:.8rem;line-height:1.5;">Construir rectas notables y localizar puntos notables del triángulo.</div>
+            <br><ul class="indicators-list">
+              <li>Identifica y construye las líneas notables mediante regla, compás o herramientas digitales</li>
+              <li>Localiza los puntos notables a partir de la intersección de las líneas correspondientes</li>
+              <li>Describe el comportamiento de los puntos notables según el tipo de triángulo</li>
+              <li>Construye ángulos de 90°, 45°, 60°, 30° combinando propiedades geométricas</li>
+            </ul>
+          </div>
+          <div class="obj-card">
+            <div class="obj-label">Circunferencias y problemas</div>
+            <div style="font-size:.8rem;line-height:1.5;">Obtener y justificar las circunferencias circunscripta e inscripta; resolver problemas.</div>
+            <br><ul class="indicators-list">
+              <li>Construye la circunferencia circunscripta utilizando el circuncentro</li>
+              <li>Construye la circunferencia inscripta interpretando el incentro como centro</li>
+              <li>Justifica la validez de los procedimientos realizados para cada circunferencia</li>
+              <li>Resuelve problemas con líneas y puntos notables en contextos intra y extramatemáticos</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" id="nota-metodologia">
+        <div class="subsection-title">Sugerencias metodológicas</div>
+        <div class="method-box"><strong>Construcción con múltiples herramientas:</strong> Fomentar la construcción de figuras utilizando regla y compás, software de geometría dinámica (GeoGebra) y otras herramientas, desarrollando autonomía y creatividad.</div>
+        <div class="method-box"><strong>Justificación oral y escrita:</strong> Guiar al estudiantado en la justificación de procedimientos de construcción, promoviendo explicaciones que articulen los conceptos utilizados (circunferencia, mediatriz, bisectriz, perpendiculares).</div>
+        <div class="method-box"><strong>Formulación y validación de conjeturas:</strong> Estimular la formulación de conjeturas sobre las propiedades de los puntos notables y su validación a través de ejemplos y contraejemplos, incluyendo distintos tipos de triángulos.</div>
+      </div>
+      <div class="tab-panel" id="nota-cronograma">
+        <div class="subsection-title">Distribución semanal sugerida</div>
+        <div class="timeline">
+          <div class="week-row"><div class="week-label">Semana 24</div><div class="week-bar wbar-nota">Mediatrices, bisectrices, medianas y alturas · Construcción con regla y compás</div></div>
+          <div class="week-row"><div class="week-label">Semana 25</div><div class="week-bar wbar-nota">Circuncentro, incentro, baricentro, ortocentro · Propiedades y clasificación</div></div>
+          <div class="week-row"><div class="week-label">Semana 26</div><div class="week-bar wbar-nota">Circunferencia circunscripta e inscripta · Problemas · Ángulos notables</div></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- ═══ B9: TRANSFORMACIONES ═══ -->
+  <div class="section-block sb-trans" id="b-trans">
+    <div class="section-header" onclick="toggleSection('b-trans')">
+      <div class="section-icon">↻</div>
+      <div class="section-title-wrap">
+        <div class="section-title">Transformaciones del plano: traslación, rotación y homotecia</div>
+        <div class="section-weeks-badge">3 semanas · 15 horas clase · Bloque: Geometría</div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(this,'trans','contenidos')" style="background:var(--trans-col);border-color:var(--trans-col);color:#fff">Contenidos</button>
+        <button class="tab-btn" onclick="switchTab(this,'trans','previos')">Conocimientos previos</button>
+        <button class="tab-btn" onclick="switchTab(this,'trans','objetivos')">Objetivos & Evaluación</button>
+        <button class="tab-btn" onclick="switchTab(this,'trans','metodologia')">Metodología</button>
+        <button class="tab-btn" onclick="switchTab(this,'trans','cronograma')">Cronograma</button>
+      </div>
+      <div class="tab-panel active" id="trans-contenidos">
+        <div class="subsection-title">Contenidos del bloque</div>
+        <ul class="content-list">
+          <li><span class="dot"></span>Traslación: vector, dirección, sentido y desplazamiento</li>
+          <li><span class="dot"></span>Rotación: centro, ángulo y sentido de giro</li>
+          <li><span class="dot"></span>Homotecia: centro y razón</li>
+          <li><span class="dot"></span>Construcción de figuras e imágenes mediante transformaciones</li>
+          <li><span class="dot"></span>Identificación de la transformación aplicada a partir de una figura y su imagen</li>
+          <li><span class="dot"></span>Determinación de preimágenes bajo estas transformaciones</li>
+        </ul>
+      </div>
+      <div class="tab-panel" id="trans-previos">
+        <div class="subsection-title">Conocimientos previos requeridos</div>
+        <ul class="content-list">
+          <li><span class="dot"></span>Nociones iniciales de proporcionalidad y semejanza</li>
+          <li><span class="dot"></span>Lectura y descripción de transformaciones simples en el plano</li>
+          <li><span class="dot"></span>Simetrías axiales</li>
+          <li><span class="dot"></span>Plano cartesiano y coordenadas</li>
+          <li><span class="dot"></span>Propiedades de ángulos y triángulos</li>
+        </ul>
+      </div>
+      <div class="tab-panel" id="trans-objetivos">
+        <div class="subsection-title">Objetivos de aprendizaje e indicadores</div>
+        <div class="obj-grid">
+          <div class="obj-card">
+            <div class="obj-label">Identificación y construcción</div>
+            <div style="font-size:.8rem;line-height:1.5;">Identificar y construir transformaciones del plano con precisión.</div>
+            <br><ul class="indicators-list">
+              <li>Reconoce traslaciones, rotaciones y homotecias a partir de figuras y sus imágenes</li>
+              <li>Identifica los elementos característicos: vector, ángulo de rotación, razón de homotecia</li>
+              <li>Construye la imagen de figuras aplicando las tres transformaciones con instrumentos o GeoGebra</li>
+              <li>Describe el efecto de cada transformación sobre posiciones, distancias y ángulos</li>
+            </ul>
+          </div>
+          <div class="obj-card">
+            <div class="obj-label">Determinación y justificación</div>
+            <div style="font-size:.8rem;line-height:1.5;">Determinar la transformación entre una figura y su imagen; justificar procedimientos.</div>
+            <br><ul class="indicators-list">
+              <li>Determina preimágenes de figuras planas bajo las transformaciones</li>
+              <li>Descubre qué transformación relaciona una figura y su imagen cuando se le brindan ambas</li>
+              <li>Justifica el procedimiento utilizado reconociendo los elementos involucrados (vector, ángulo, razón)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" id="trans-metodologia">
+        <div class="subsection-title">Sugerencias metodológicas</div>
+        <div class="method-box"><strong>GeoGebra como herramienta central:</strong> Usar GeoGebra para explorar transformaciones de forma dinámica: modificar el vector de traslación, el ángulo de rotación o la razón de homotecia y observar el efecto sobre la figura original.</div>
+        <div class="method-box"><strong>Exploración desde lo concreto:</strong> Comenzar con materiales concretos o papel cuadriculado antes de avanzar hacia representaciones dinámicas digitales, construyendo la intuición geométrica.</div>
+        <div class="method-box"><strong>Aplicaciones en diseño y arte:</strong> Fomentar la aplicación de los conocimientos geométricos en proyectos reales o simulaciones: diseño, mosaicos, arquitectura, donde las transformaciones del plano son herramientas creativas.</div>
+        <div class="method-box"><strong>Reconocimiento inverso:</strong> Plantear situaciones donde se brinda la figura y su imagen para que el estudiantado descubra la transformación aplicada, fortaleciendo la comprensión de los elementos invariantes.</div>
+      </div>
+      <div class="tab-panel" id="trans-cronograma">
+        <div class="subsection-title">Distribución semanal sugerida</div>
+        <div class="timeline">
+          <div class="week-row"><div class="week-label">Semana 27</div><div class="week-bar wbar-trans">Traslación · Vector · Dirección y sentido · Construcción de imágenes</div></div>
+          <div class="week-row"><div class="week-label">Semana 28</div><div class="week-bar wbar-trans">Rotación · Centro y ángulo · Homotecia · Centro y razón</div></div>
+          <div class="week-row"><div class="week-label">Semana 29</div><div class="week-bar wbar-trans">Determinación de la transformación aplicada · Preimágenes · GeoGebra</div></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- ═══ B10: THALES Y SEMEJANZA ═══ -->
+  <div class="section-block sb-thal" id="b-thal">
+    <div class="section-header" onclick="toggleSection('b-thal')">
+      <div class="section-icon">∥</div>
+      <div class="section-title-wrap">
+        <div class="section-title">Teorema de Thales y semejanza de triángulos</div>
+        <div class="section-weeks-badge">3 semanas · 15 horas clase · Bloque: Geometría</div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(this,'thal','contenidos')" style="background:var(--thal-col);border-color:var(--thal-col);color:#fff">Contenidos</button>
+        <button class="tab-btn" onclick="switchTab(this,'thal','previos')">Conocimientos previos</button>
+        <button class="tab-btn" onclick="switchTab(this,'thal','objetivos')">Objetivos & Evaluación</button>
+        <button class="tab-btn" onclick="switchTab(this,'thal','metodologia')">Metodología</button>
+        <button class="tab-btn" onclick="switchTab(this,'thal','cronograma')">Cronograma</button>
+      </div>
+      <div class="tab-panel active" id="thal-contenidos">
+        <div class="subsection-title">Contenidos del bloque</div>
+        <ul class="content-list">
+          <li><span class="dot"></span>Reconocimiento del teorema de Thales en triángulos y aplicación al cálculo de longitudes</li>
+          <li><span class="dot"></span>Reconocimiento de triángulos semejantes y aplicación de criterios: AA (ángulo-ángulo), LLL (lado-lado-lado), LAL (lado-ángulo-lado)</li>
+          <li><span class="dot"></span>Relación entre Thales y la homotecia como transformación que conserva la forma</li>
+          <li><span class="dot"></span>Razón de semejanza como relación de proporcionalidad entre lados homólogos</li>
+          <li><span class="dot"></span>Resolución de problemas que involucren segmentos proporcionales, escalas, reducción o ampliación</li>
+        </ul>
+      </div>
+      <div class="tab-panel" id="thal-previos">
+        <div class="subsection-title">Conocimientos previos requeridos</div>
+        <ul class="content-list">
+          <li><span class="dot"></span>Nociones iniciales de proporcionalidad y semejanza</li>
+          <li><span class="dot"></span>Propiedades básicas de triángulos y ángulos</li>
+          <li><span class="dot"></span>Homotecia: centro y razón (bloque anterior)</li>
+          <li><span class="dot"></span>Resolución de ecuaciones de primer grado</li>
+          <li><span class="dot"></span>Proporcionalidad directa y constante k</li>
+        </ul>
+      </div>
+      <div class="tab-panel" id="thal-objetivos">
+        <div class="subsection-title">Objetivos de aprendizaje e indicadores</div>
+        <div class="obj-grid">
+          <div class="obj-card">
+            <div class="obj-label">Teorema de Thales</div>
+            <div style="font-size:.8rem;line-height:1.5;">Reconocer configuraciones y aplicar Thales para determinar longitudes en triángulos.</div>
+            <br><ul class="indicators-list">
+              <li>Identifica situaciones donde se aplica la propiedad de Thales al trabajar con triángulos</li>
+              <li>Describe las condiciones necesarias para la aplicación de Thales</li>
+              <li>Utiliza la propiedad para determinar la medida de lados proporcionales</li>
+              <li>Aplica estrategias de resolución de ecuaciones en problemas con Thales</li>
+            </ul>
+          </div>
+          <div class="obj-card">
+            <div class="obj-label">Semejanza de triángulos</div>
+            <div style="font-size:.8rem;line-height:1.5;">Identificar triángulos semejantes y aplicar criterios para resolver problemas métricos.</div>
+            <br><ul class="indicators-list">
+              <li>Reconoce triángulos semejantes justificando la semejanza por razones de proporcionalidad o conservación de ángulos</li>
+              <li>Identifica los criterios AA, LLL y LAL y los aplica en distintos contextos</li>
+              <li>Interpreta la razón de semejanza como proporcionalidad entre lados homólogos</li>
+              <li>Resuelve problemas determinando longitudes desconocidas a partir de la semejanza</li>
+              <li>Verifica la coherencia de los resultados obtenidos</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" id="thal-metodologia">
+        <div class="subsection-title">Sugerencias metodológicas</div>
+        <div class="method-box"><strong>Vincular con proporcionalidad y homotecia:</strong> Abordar el trabajo con Thales en relación con proporcionalidad directa y homotecia, para que el estudiantado construya una red conceptual coherente entre estos contenidos.</div>
+        <div class="method-box"><strong>De la intuición a la formalización:</strong> Partir de la noción intuitiva de ampliación y reducción proporcional de triángulos semejantes antes de formalizar los criterios. Usar dibujos a mano y material concreto inicialmente.</div>
+        <div class="method-box"><strong>GeoGebra para visualización dinámica:</strong> Utilizar GeoGebra para visualizar cómo varían las longitudes manteniendo constante la forma y cómo la razón de semejanza determina relaciones proporcionales entre lados homólogos.</div>
+        <div class="method-box"><strong>Integración de criterios y métricas:</strong> Integrar el abordaje de los criterios de semejanza con la resolución de problemas métricos que requieran aplicar ecuaciones de proporcionalidad.</div>
+      </div>
+      <div class="tab-panel" id="thal-cronograma">
+        <div class="subsection-title">Distribución semanal sugerida</div>
+        <div class="timeline">
+          <div class="week-row"><div class="week-label">Semana 30</div><div class="week-bar wbar-thal">Teorema de Thales · Condiciones de aplicación · Cálculo de longitudes</div></div>
+          <div class="week-row"><div class="week-label">Semana 31</div><div class="week-bar wbar-thal">Triángulos semejantes · Razón de semejanza · Criterio AA</div></div>
+          <div class="week-row"><div class="week-label">Semana 32</div><div class="week-bar wbar-thal">Criterios LLL y LAL · Problemas métricos · Relación con homotecia</div></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+
+  <!-- ═══ EVALUACIÓN ═══ -->
+  <div style="margin-bottom:2rem;">
+    <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:1rem;padding-top:.5rem;">Criterios de evaluación</div>
+    <div class="eval-grid">
+      <div class="eval-card"><strong>Evaluación formativa</strong>Continua, orientada a valorar procesos y generar oportunidades de revisión. El error se reconoce como parte del aprendizaje.</div>
+      <div class="eval-card"><strong>Instrumentos variados</strong>Proyectos, presentaciones, portafolios y producciones colaborativas, contemplando diversidad de métodos y estrategias.</div>
+      <div class="eval-card"><strong>Auto y coevaluación</strong>Instancias de reflexión sobre el propio trabajo y evaluación entre pares en entorno colaborativo.</div>
+      <div class="eval-card"><strong>Transparencia anticipada</strong>El estudiantado conoce los mecanismos de evaluación de antemano para orientar su trayectoria de aprendizaje.</div>
+    </div>
+  </div>
+
+  <!-- ═══ BIBLIOGRAFÍA ═══ -->
+  <div style="max-width:980px; margin: 2.5rem auto 0;">
+    <div style="background:var(--card);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;">
+      <div style="background:var(--ink);padding:1.4rem 1.75rem;display:flex;align-items:center;gap:1rem;cursor:pointer;" onclick="toggleBib()">
+        <div style="width:44px;height:44px;border-radius:10px;background:var(--accent);display:grid;place-items:center;font-size:1.3rem;flex-shrink:0;">📚</div>
+        <div style="flex:1;">
+          <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:var(--bg);">Bibliografía y Recursos</div>
+          <div style="font-size:.67rem;letter-spacing:.1em;text-transform:uppercase;color:#6b7280;margin-top:.1rem;">Docentes · Estudiantes · Referencias</div>
+        </div>
+        <div id="bib-chevron" style="width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.1);display:grid;place-items:center;font-size:.8rem;color:var(--bg);transition:transform .3s;">▾</div>
+      </div>
+      <div id="bib-body" style="max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1);">
+        <div style="padding:1.75rem;">
+          <div class="tabs" id="bib-tabs">
+            <button class="tab-btn" id="bib-tab-doc" onclick="switchBibTab('doc')">Para docentes</button>
+            <button class="tab-btn" id="bib-tab-est" onclick="switchBibTab('est')">Para estudiantes</button>
+            <button class="tab-btn" id="bib-tab-ref" onclick="switchBibTab('ref')">Referencias teóricas</button>
+          </div>
+
+          <!-- DOCENTES -->
+          <div id="bib-doc" class="bib-panel">
+            <div class="subsection-title">Recursos para docentes</div>
+            <div style="display:flex;flex-direction:column;gap:.7rem;">
+              <div class="bib-card"><div class="bib-badge bib-digital">🌐 Digital</div><div class="bib-title">Plataforma CREA — Grupo MATEMAC</div><div class="bib-author">ANEP · Dirección General de Educación Secundaria</div></div>
+              <div class="bib-card"><div class="bib-badge bib-digital">🌐 Digital</div><div class="bib-title">GeoGebra — Herramientas y recursos</div><a class="bib-link" href="https://www.geogebra.org/" target="_blank">geogebra.org ↗</a></div>
+              <div class="bib-card"><div class="bib-badge bib-digital">🌐 Digital</div><div class="bib-title">Mathigon — El patio de recreo matemático</div><a class="bib-link" href="https://mathigon.org/" target="_blank">mathigon.org ↗</a></div>
+              <div class="bib-card"><div class="bib-badge bib-digital">🌐 Digital</div><div class="bib-title">Khan Academy en español</div><a class="bib-link" href="https://es.khanacademy.org/" target="_blank">es.khanacademy.org ↗</a></div>
+              <div class="bib-card"><div class="bib-badge bib-digital">🌐 Digital</div><div class="bib-title">Polypad — Herramientas manipulativas digitales (Amplify)</div><a class="bib-link" href="https://polypad.amplify.com/es/" target="_blank">polypad.amplify.com/es ↗</a></div>
+              <div class="bib-card"><div class="bib-badge bib-digital">🌐 Digital</div><div class="bib-title">PuntMat — Blog con recursos y actividades</div><div class="bib-author">Cerezo, A. y Calvo, C. (2020)</div><a class="bib-link" href="https://puntmat.blogspot.com/" target="_blank">puntmat.blogspot.com ↗</a></div>
+              <div class="bib-card"><div class="bib-badge bib-digital">🌐 Digital</div><div class="bib-title">Aprender a Enseñar Matemáticas en Secundaria</div><div class="bib-author">Calvo, C., Deulofeu, J., Jareño, J. y Morera (2016)</div><a class="bib-link" href="https://sites.google.com/site/aprenderaensenarmatematicas" target="_blank">Ver sitio ↗</a></div>
+              <div class="bib-card"><div class="bib-badge bib-digital">🌐 Digital</div><div class="bib-title">NRICH — Secondary Students</div><div class="bib-author">University of Cambridge (2024)</div><a class="bib-link" href="https://nrich.maths.org/secondary" target="_blank">nrich.maths.org ↗</a></div>
+              <div class="bib-card"><div class="bib-badge bib-digital">🌐 Digital</div><div class="bib-title">Which One Doesn't Belong? — Actividades de razonamiento</div><a class="bib-link" href="https://talkingmathwithkids.com/wodb/" target="_blank">talkingmathwithkids.com ↗</a></div>
+              <div class="bib-card"><div class="bib-badge bib-digital">🌐 Digital</div><div class="bib-title">El lenguaje de funciones y gráficas</div><div class="bib-author">Shell Center for Mathematical Education. Trad. Alayo, F. (1990) — Ministerio de Educación y Ciencia / Universidad del País Vasco</div><a class="bib-link" href="https://cursopg2010.wordpress.com/wp-content/uploads/2010/12/el_lenguaje_de_funciones.pdf" target="_blank">Ver PDF ↗</a></div>
+              <div class="bib-card"><div class="bib-badge bib-libro">📖 Serie</div><div class="bib-title">Estrechando lazos entre investigación y formación en Matemática Educativa. Vol. I–VIII</div><div class="bib-author">Buendía, G., Molfino, V. y Ochoviet, C. (2014) — ANEP / Consejo de Formación en Educación</div></div>
+              <div class="bib-card"><div class="bib-badge bib-libro">📖 Libro</div><div class="bib-title">Matemáticas en contexto — Materiales de aula</div><div class="bib-author">Holt, Rinehart, Winston (2016) — Instituto Freudenthal para la educación en Ciencias y Matemáticas</div></div>
+              <div class="bib-card"><div class="bib-badge bib-libro">📖 Artículo</div><div class="bib-title">Rol de las definiciones en la enseñanza y aprendizaje de la matemática</div><div class="bib-author">Vinner, S. (1991) — en: Advanced Mathematical Thinking, Tall, D. (ed.)</div><a class="bib-link" href="https://es.scribd.com/document/504011791/Rol-de-Las-Definiciones-Vinner" target="_blank">Ver en Scribd ↗</a></div>
+              <div class="bib-card"><div class="bib-badge bib-libro">📖 Historia</div><div class="bib-title">Historia de la Matemática. Vol. I y II</div><div class="bib-author">Rey Pastor, J. y Babini, J. (1951–1952) — Editorial Losada</div></div>
+              <div class="bib-card"><div class="bib-badge bib-libro">📖 Recurso</div><div class="bib-title">Otras miradas: Aportaciones de las mujeres a las matemáticas</div><div class="bib-author">Federación de Enseñanza de CCOO (2011) — Para integrar en el currículum de Secundaria</div></div>
+            </div>
+          </div>
+
+          <!-- ESTUDIANTES -->
+          <div id="bib-est" class="bib-panel" style="display:none;">
+            <div class="subsection-title">Recursos para estudiantes</div>
+            <div style="display:flex;flex-direction:column;gap:.7rem;">
+              <div class="bib-card"><div class="bib-badge bib-libro">📖 Libro</div><div class="bib-title">Matemática 8° — Texto principal del curso</div><div class="bib-author">Ochoviet, C. y Olave, M. (2024) — Editorial Contexto · Biblioteca País</div><a class="bib-link" href="https://bibliotecapais.ceibal.edu.uy/info/matematica-8-00034227" target="_blank">Acceder en Biblioteca País ↗</a></div>
+              <div class="bib-card"><div class="bib-badge bib-libro">📖 Libro</div><div class="bib-title">Matemática 7° — Referencia para saberes previos</div><div class="bib-author">Ochoviet, C. y Olave, M. (2024) — Editorial Contexto · Biblioteca País</div><a class="bib-link" href="https://bibliotecapais.ceibal.edu.uy/info/matematica-7-00034228" target="_blank">Acceder en Biblioteca País ↗</a></div>
+              <div class="bib-card"><div class="bib-badge bib-libro">📖 Libro</div><div class="bib-title">Matemática 2 — Grupo Botadá</div><div class="bib-author">Borbonet, M., Burgos, B., Martínez, A., Ravaioli, N. — Editorial Fin de Siglo · Biblioteca País</div><a class="bib-link" href="https://bibliotecapais.ceibal.edu.uy/info/matematica-2-00004113" target="_blank">Acceder en Biblioteca País ↗</a></div>
+              <div class="bib-card"><div class="bib-badge bib-libro">📖 Libro</div><div class="bib-title">Prácticas 2</div><div class="bib-author">Da Costa, S. y Scorza, V. (2011) — Santillana · Biblioteca País</div><a class="bib-link" href="https://bibliotecapais.ceibal.edu.uy/info/matematica-2-practicas-00017522" target="_blank">Acceder en Biblioteca País ↗</a></div>
+              <div class="bib-card"><div class="bib-badge bib-libro">📖 Libro</div><div class="bib-title">Prácticas 3</div><div class="bib-author">Da Costa, S. y Scorza, V. (2011) — Santillana · Biblioteca País</div><a class="bib-link" href="https://bibliotecapais.ceibal.edu.uy/info/matematica-3-practicas-00004145" target="_blank">Acceder en Biblioteca País ↗</a></div>
+              <div class="bib-card"><div class="bib-badge bib-libro">📖 Libro</div><div class="bib-title">Matemática 1</div><div class="bib-author">Ochoviet, C. y Vitabar, F. (2013) — Losa Ediciones · Biblioteca País</div><a class="bib-link" href="https://bibliotecapais.ceibal.edu.uy/info/matematica-1-00034230" target="_blank">Acceder en Biblioteca País ↗</a></div>
+              <div class="bib-card"><div class="bib-badge bib-libro">📖 Libro</div><div class="bib-title">Matemática 2</div><div class="bib-author">Ochoviet, C. y Vitabar, F. (2014) — Losa Ediciones · Biblioteca País</div><a class="bib-link" href="https://bibliotecapais.ceibal.edu.uy/info/matematica-2-00034231" target="_blank">Acceder en Biblioteca País ↗</a></div>
+              <div class="bib-card"><div class="bib-badge bib-libro">📖 Lectura motivadora</div><div class="bib-title">Pifias Matemáticas: equivocarse nunca ha sido tan divertido</div><div class="bib-author">Parker, M. (2020) — Crítica · Biblioteca País</div><a class="bib-link" href="https://bibliotecapais.ceibal.edu.uy/info/pifias-matematicas-equivocarse-nunca-ha-sido-tan-divertido-00015627" target="_blank">Acceder en Biblioteca País ↗</a></div>
+              <div class="bib-card"><div class="bib-badge bib-digital">🌐 Digital</div><div class="bib-title">GeoGebra — Herramientas y recursos interactivos</div><a class="bib-link" href="https://www.geogebra.org/" target="_blank">geogebra.org ↗</a></div>
+            </div>
+          </div>
+
+          <!-- REFERENCIAS -->
+          <div id="bib-ref" class="bib-panel" style="display:none;">
+            <div class="subsection-title">Referencias bibliográficas del programa</div>
+            <div style="display:flex;flex-direction:column;gap:.7rem;">
+              <div class="bib-card"><div class="bib-badge bib-inst">🏛 Institucional</div><div class="bib-title">Uruguay en PISA 2015 — Informe de Resultados</div><div class="bib-author">ANEP (2017)</div></div>
+              <div class="bib-card"><div class="bib-badge bib-inst">🏛 Institucional</div><div class="bib-title">Marco conceptual de Matemática — Programa PISA Uruguay</div><div class="bib-author">ANEP (2022)</div></div>
+              <div class="bib-card"><div class="bib-badge bib-inst">🏛 Institucional</div><div class="bib-title">Programa de Educación Media Superior DGES-DGETP, tramo 7, grado 1°</div><div class="bib-author">ANEP (2023)</div></div>
+              <div class="bib-card"><div class="bib-badge bib-inst">🏛 Institucional</div><div class="bib-title">Orientaciones para el abordaje: Educación en Sexualidad (Res. N.º 708/024, Acta N.º 10)</div><div class="bib-author">ANEP (2024)</div></div>
+              <div class="bib-card"><div class="bib-badge bib-inst">🏛 Institucional</div><div class="bib-title">IA para enseñar, enseñar IA — Marco referencial docente sobre inteligencia artificial</div><div class="bib-author">Ceibal – ANEP (2025)</div></div>
+              <div class="bib-card"><div class="bib-badge bib-libro">📖 Libro</div><div class="bib-title">Estrategias de enseñanza: otra mirada al quehacer en el aula</div><div class="bib-author">Anijovich, R. (2010) — Aique</div></div>
+              <div class="bib-card"><div class="bib-badge bib-libro">📖 Capítulo</div><div class="bib-title">Fundamentos y método de la didáctica de las Matemáticas</div><div class="bib-author">Brousseau, G. (1993) — en: Lecturas de didáctica de las matemáticas, escuela francesa, Sánchez y Zubieta (comps.)</div></div>
+              <div class="bib-card"><div class="bib-badge bib-libro">📖 Artículo</div><div class="bib-title">Tratamiento didáctico interdisciplinario de funciones matemáticas</div><div class="bib-author">Castillo, Y. y Gamboa, M. (2020) — Revista Didasc@lia</div></div>
+              <div class="bib-card"><div class="bib-badge bib-libro">📖 Libro</div><div class="bib-title">Didáctica Práctica para enseñanza media y superior</div><div class="bib-author">Fiore, E. y Leymonié, J. (2007) — Editorial Grupo Magro</div></div>
+              <div class="bib-card"><div class="bib-badge bib-libro">📖 Libro</div><div class="bib-title">La educación matemática realista y su aplicación en el aula de clases</div><div class="bib-author">Mendoza, R., Rocha, V., Arbañil, R., Farfan, J., Larroche, B., Piedra, J. (2023) — Editorial Mar Caribe</div></div>
+              <div class="bib-card"><div class="bib-badge bib-inst">🏛 Institucional</div><div class="bib-title">Educación y Derechos Humanos: orientaciones para el aula</div><div class="bib-author">Ministerio de Educación y Cultura – Uruguay (2019)</div></div>
+              <div class="bib-card"><div class="bib-badge bib-libro">📖 Capítulo</div><div class="bib-title">La competencia matemática en PISA</div><div class="bib-author">Rico, L. (2005) — en: La enseñanza de las matemáticas y el Informe PISA, Fundación Santillana</div></div>
+              <div class="bib-card"><div class="bib-badge bib-libro">📖 Libro</div><div class="bib-title">Cómo plantear y resolver problemas</div><div class="bib-author">Pólya, G. (1989) — Trillas</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  Matemática · 8° EBI · DGES — Versión final Comisión de Programa · 5 horas semanales
+</footer>
+
+<script>
+  function toggleSection(id) {
+    document.getElementById(id).classList.toggle('open');
+  }
+  function expandAll() {
+    document.querySelectorAll('.section-block').forEach(b => b.classList.add('open'));
+  }
+  function collapseAll() {
+    document.querySelectorAll('.section-block').forEach(b => b.classList.remove('open'));
+  }
+  function switchTab(btn, prefix, tabName) {
+    const block = btn.closest('.section-block');
+    block.querySelectorAll('.tab-btn').forEach(b => {
+      b.style.background = ''; b.style.borderColor = ''; b.style.color = '';
+      b.classList.remove('active');
+    });
+    block.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    const colorMap = {
+      porc: 'var(--porc-col)', ivp: 'var(--ivp-col)', prob: 'var(--prob-col)',
+      alg: 'var(--alg-col)', ecin: 'var(--ecin-col)', func: 'var(--func-col)',
+      prop: 'var(--prop-col)', nota: 'var(--nota-col)', trans: 'var(--trans-col)',
+      thal: 'var(--thal-col)'
+    };
+    const col = colorMap[prefix] || 'var(--ink)';
+    btn.style.background = col; btn.style.borderColor = col; btn.style.color = '#fff';
+    const panel = document.getElementById(prefix + '-' + tabName);
+    if (panel) panel.classList.add('active');
+  }
+  function toggleBib() {
+    const body = document.getElementById('bib-body');
+    const chev = document.getElementById('bib-chevron');
+    if (!body.style.maxHeight || body.style.maxHeight === '0px') {
+      body.style.maxHeight = '9000px';
+      chev.style.transform = 'rotate(180deg)';
+      switchBibTab('doc');
+    } else {
+      body.style.maxHeight = '0px';
+      chev.style.transform = '';
+    }
+  }
+  function switchBibTab(tab) {
+    ['doc','est','ref'].forEach(t => {
+      document.getElementById('bib-' + t).style.display = t === tab ? 'block' : 'none';
+      const btn = document.getElementById('bib-tab-' + t);
+      if (btn) {
+        btn.style.background = t === tab ? '#111827' : '';
+        btn.style.borderColor = t === tab ? '#111827' : '';
+        btn.style.color = t === tab ? '#f2f4f8' : '';
+      }
+    });
+  }
+</script>
+</body>
+</html>
